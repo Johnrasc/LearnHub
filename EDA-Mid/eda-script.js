@@ -1,6 +1,7 @@
 // ==========================================
 //  NUMERICAL METHODS (Midterm)
 // ==========================================
+
 const probabilityQuestionsData = [
     { q: "What is the primary use of probability in statistics?", options: ["To guarantee outcomes", "To describe chance or randomness", "To eliminate bias", "To calculate exact future dates"], ans: 1 },
     { q: "Probability deals with the ______ of an occurrence rather than a guarantee.", options: ["Certainty", "Impossibility", "Likelihood", "History"], ans: 2 },
