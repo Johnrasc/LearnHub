@@ -16,10 +16,11 @@ class Particle {
         this.color = color;
     }
     draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-        ctx.fillStyle = '#00f2ff';
-        ctx.fill();
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+    // Use the dynamic accent color from CSS
+    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent');
+    ctx.fill();
     }
     update() {
         if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
@@ -54,12 +55,16 @@ function animate() {
 }
 
 function connect() {
+    let opacityValue = 1;
     for (let a = 0; a < particlesArray.length; a++) {
         for (let b = a; b < particlesArray.length; b++) {
             let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
                 + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+            
             if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-                ctx.strokeStyle = 'rgba(0, 242, 255, 0.1)';
+                opacityValue = 1 - (distance / 20000);
+                let accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-rgb');
+                ctx.strokeStyle = `rgba(${accentColor}, ${opacityValue * 0.2})`;
                 ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
