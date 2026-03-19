@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LearnHub | Premium</title>
+    <title>LearnHub | Freemium</title>
     <link rel="stylesheet" href="hub-style.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
@@ -13,8 +13,8 @@
     <div class="hub-container">
         <header>
             <div class="badge">SY 2025-2026</div>
-            <h1 class="glitch-text" data-text="STI REVIEWER HUB">Learn<span>Hub</span></h1>
-            <p class="subtitle">Reviewer for your studies, sheeesh napakaangas eyyyyy</p>
+            <h1 class="glitch-text" data-text="LEARNHUB">Learn<span>Hub</span></h1>
+            <p class="subtitle">Sheeesh Napakaangas EEEEEEEEEEEYYYYYY</p>
             
             <div class="search-wrapper">
                 <input type="text" id="searchInput" placeholder="Search your subject..." onkeyup="filterCards()">
@@ -28,9 +28,9 @@
                 <div class="card-content">
                     <span class="subject-code">Midterm</span>
                     <h3>Great Books</h3>
-                    <p>Classical, Medieval, and Renaissance Literature.</p>
+                    <p>Exploring classical literature and world-changing narratives.</p>
                 </div>
-                <div class="card-footer">Start Session <span>→</span></div>
+                <div class="card-footer">Start Quiz <span>→</span></div>
             </a>
 
             <a href="Numerical-Method-Mid/numerical-methods.html" class="subject-card">
@@ -38,19 +38,19 @@
                 <div class="card-content">
                     <span class="subject-code">Midterm</span>
                     <h3>Numerical Methods</h3>
-                    <p>Cramer's Rule, Gaussian Elimination, and LU Decomposition.</p>
+                    <p>Mathematical algorithms for complex engineering computations.</p>
                 </div>
-                <div class="card-footer">Start Session <span>→</span></div>
+                <div class="card-footer">Start Quiz <span>→</span></div>
             </a>
 
             <a href="FOEC2-Mid/foec2.html" class="subject-card">
                 <div class="card-icon">03</div>
                 <div class="card-content">
                     <span class="subject-code">Midterm</span>
-                    <h3>Fundamentals of Electronics Circuit</h3>
-                    <p>MBJTs, FETs, and LC/RC Oscillator configurations.</p>
+                    <h3>Fundamentals of Electronics Circuits</h3>
+                    <p>Circuit analysis, semiconductor devices, and signal processing.</p>
                 </div>
-                <div class="card-footer">Start Session <span>→</span></div>
+                <div class="card-footer">Start Quiz <span>→</span></div>
             </a>
 
             <a href="EDA-Mid/eda-mid.html" class="subject-card">
@@ -60,7 +60,7 @@
                     <h3>Engineering Data Analysis</h3>
                     <p>Statistical methods and data visualization techniques.</p>
                 </div>
-                <div class="card-footer">Start Session <span>→</span></div>
+                <div class="card-footer">Start Quiz <span>→</span></div>
             </a>
 
             <a href="Software-Design-Mid/sd-mid.html" class="subject-card">
@@ -68,23 +68,58 @@
                 <div class="card-content">
                     <span class="subject-code">Midterm</span>
                     <h3>Software Design</h3>
-                    <p>Principles and patterns for designing robust software systems.</p>
+                    <p>Principles of software architecture and design patterns.</p>
                 </div>
-                <div class="card-footer">Start Session <span>→</span></div>
+                <div class="card-footer">Start Quiz <span>→</span></div>
             </a>
-
         </main>
+
+        <footer class="hub-footer">
+            <div class="footer-line"></div>
+            <div class="footer-content">
+                <div class="footer-left">
+                    <span class="status-dot"></span> SYSTEM OPERATIONAL
+                </div>
+                <div class="footer-center">
+                    &copy; 2026 LearnHub // MyBad_ :)
+                </div>
+                <div class="footer-right">
+                    V 1.0.1 - STABLE
+                </div>
+            </div>
+        </footer>
     </div>
 
     <script src="hub-animation.js"></script>
     <script>
+        const searchInput = document.querySelector('#searchInput');
+        const searchGlow = document.querySelector('.search-glow');
+
+        if (searchInput) {
+            searchInput.addEventListener('mousemove', (e) => {
+                const rect = searchInput.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                searchGlow.style.setProperty('--x', `${x}%`);
+                searchGlow.style.setProperty('--y', `${y}%`);
+            });
+        }
+
         function filterCards() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.querySelectorAll('.subject-card');
             cards.forEach(card => {
                 let title = card.querySelector('h3').innerText.toLowerCase();
-                card.style.opacity = title.includes(input) ? "1" : "0.2";
-                card.style.pointerEvents = title.includes(input) ? "auto" : "none";
+                let code = card.querySelector('.subject-code').innerText.toLowerCase();
+        
+                if (title.includes(input) || code.includes(input)) {
+                    card.style.display = "flex";
+                    // Use opacity for a smooth fade-in
+                    setTimeout(() => { card.style.opacity = "1"; }, 10);
+                } else {
+                    card.style.opacity = "0";
+                    card.style.display = "none";
+                }
             });
         }
     </script>
