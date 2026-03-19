@@ -16,11 +16,10 @@ class Particle {
         this.color = color;
     }
     draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-    // Use the dynamic accent color from CSS
-    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent');
-    ctx.fill();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+        ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent');
+        ctx.fill();
     }
     update() {
         if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
@@ -38,10 +37,30 @@ function init() {
         let size = (Math.random() * 2) + 1;
         let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
         let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-        let directionX = (Math.random() * 1) - 0.5;
-        let directionY = (Math.random() * 1) - 0.5;
+        let directionX = (Math.random() * 0.5) - 0.25;
+        let directionY = (Math.random() * 0.5) - 0.25;
         let color = '#00f2ff';
         particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+    }
+}
+
+function connect() {
+    let opacityValue = 1;
+    for (let a = 0; a < particlesArray.length; a++) {
+        for (let b = a; b < particlesArray.length; b++) {
+            let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+            if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                opacityValue = 1 - (distance / 20000);
+                let accentRGB = getComputedStyle(document.documentElement).getPropertyValue('--accent-rgb');
+                ctx.strokeStyle = `rgba(${accentRGB}, ${opacityValue * 0.15})`;
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                ctx.stroke();
+            }
+        }
     }
 }
 
@@ -52,27 +71,6 @@ function animate() {
         particlesArray[i].update();
     }
     connect();
-}
-
-function connect() {
-    let opacityValue = 1;
-    for (let a = 0; a < particlesArray.length; a++) {
-        for (let b = a; b < particlesArray.length; b++) {
-            let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
-                + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-            
-            if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-                opacityValue = 1 - (distance / 20000);
-                let accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-rgb');
-                ctx.strokeStyle = `rgba(${accentColor}, ${opacityValue * 0.2})`;
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                ctx.stroke();
-            }
-        }
-    }
 }
 
 window.addEventListener('resize', () => {
