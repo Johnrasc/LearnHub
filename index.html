@@ -23,6 +23,12 @@
                 <input type="text" id="searchInput" placeholder="Search your subject..." onkeyup="filterCards()">
                 <div class="search-glow"></div>
             </div>
+
+            <div class="filter-tabs">
+                <button class="filter-btn active" onclick="filterTerm('all')">All</button>
+                <button button class="filter-btn" onclick="filterTerm('midterm')">Midterm</button>
+                <button class="filter-btn" onclick="filterTerm('prefinals')">Prefinals</button>
+            </div>
         </header>
 
         <main class="subject-grid" id="subjectGrid">
