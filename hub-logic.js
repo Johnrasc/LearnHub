@@ -32,6 +32,23 @@ function filterCards() {
     });
 }
 
+function filterTerm(term) {
+    const cards = document.querySelectorAll('.subject-card');
+    const buttons = document.querySelectorAll('.filter-btn');
+    
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    cards.forEach(card => {
+        const code = card.querySelector('.subject-code').innerText.toLowerCase();
+        if (term === 'all' || code.includes(term)) {
+            card.style.display = "flex";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+
 
 function toggleMenu(subjectName) {
     console.log(`Accessing extended resources for: ${subjectName}`);
