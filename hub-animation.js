@@ -6,26 +6,62 @@ canvas.height = window.innerHeight;
 
 let particlesArray;
 
+// Initialize mouse with undefined to prevent math errors before first movement
+let mouse = { x: undefined, y: undefined, radius: 120 };
+
+window.addEventListener('mousemove', (e) => {
+    mouse.x = e.x;
+    mouse.y = e.y;
+});
+
+// Cache CSS variables once to prevent expensive layout thrashing in the animation loop
+const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+const accentRGB = getComputedStyle(document.documentElement).getPropertyValue('--accent-rgb').trim();
+
 class Particle {
-    constructor(x, y, directionX, directionY, size, color) {
+    constructor(x, y, directionX, directionY, size) {
         this.x = x;
         this.y = y;
         this.directionX = directionX;
         this.directionY = directionY;
         this.size = size;
-        this.color = color;
     }
+
     draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-        ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent');
+        ctx.fillStyle = accentColor;
         ctx.fill();
     }
+
     update() {
-        if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-        if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+        // Collision detection with window boundaries
+        if (this.x > canvas.width || this.x < 0) {
+            this.directionX = -this.directionX;
+        }
+        if (this.y > canvas.height || this.y < 0) {
+            this.directionY = -this.directionY;
+        }
+
+        // Mouse Interactivity (Repulsion Logic)
+        if (mouse.x !== undefined && mouse.y !== undefined) {
+            let dx = mouse.x - this.x;
+            let dy = mouse.y - this.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < mouse.radius) {
+                // Smoothly push particles away from the cursor
+                if (mouse.x < this.x && this.x < canvas.width - this.size * 10) this.x += 2;
+                if (mouse.x > this.x && this.x > this.size * 10) this.x -= 2;
+                if (mouse.y < this.y && this.y < canvas.height - this.size * 10) this.y += 2;
+                if (mouse.y > this.y && this.y > this.size * 10) this.y -= 2;
+            }
+        }
+
+        // Standard movement
         this.x += this.directionX;
         this.y += this.directionY;
+        
         this.draw();
     }
 }
@@ -33,14 +69,15 @@ class Particle {
 function init() {
     particlesArray = [];
     let numberOfParticles = (canvas.height * canvas.width) / 9000;
+    
     for (let i = 0; i < numberOfParticles; i++) {
         let size = (Math.random() * 2) + 1;
         let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
         let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-        let directionX = (Math.random() * 0.5) - 0.25;
-        let directionY = (Math.random() * 0.5) - 0.25;
-        let color = '#00f2ff';
-        particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+        let directionX = (Math.random() * 1) - 0.5;
+        let directionY = (Math.random() * 1) - 0.5;
+
+        particlesArray.push(new Particle(x, y, directionX, directionY, size));
     }
 }
 
@@ -50,10 +87,10 @@ function connect() {
         for (let b = a; b < particlesArray.length; b++) {
             let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
                 + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+            
             if (distance < (canvas.width / 7) * (canvas.height / 7)) {
                 opacityValue = 1 - (distance / 20000);
-                let accentRGB = getComputedStyle(document.documentElement).getPropertyValue('--accent-rgb');
-                ctx.strokeStyle = `rgba(${accentRGB}, ${opacityValue * 0.15})`;
+                ctx.strokeStyle = `rgba(${accentRGB}, ${opacityValue * 0.2})`;
                 ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -67,6 +104,7 @@ function connect() {
 function animate() {
     requestAnimationFrame(animate);
     ctx.clearRect(0, 0, innerWidth, innerHeight);
+
     for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update();
     }
@@ -77,6 +115,12 @@ window.addEventListener('resize', () => {
     canvas.width = innerWidth;
     canvas.height = innerHeight;
     init();
+});
+
+// Reset mouse coordinates when the cursor leaves the window
+window.addEventListener('mouseout', () => {
+    mouse.x = undefined;
+    mouse.y = undefined;
 });
 
 init();
