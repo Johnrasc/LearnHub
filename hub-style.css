@@ -104,6 +104,41 @@ h1 span { color: var(--accent); text-shadow: 0 0 30px rgba(var(--accent-rgb), 0.
 
 #searchInput:focus + .search-glow { opacity: 1; }
 
+/* --- FILTER TABS --- */
+.filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px auto 0;
+}
+
+.filter-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    color: #64748b;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    color: var(--text);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.filter-btn.active {
+    background: rgba(var(--accent-rgb), 0.1);
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.1);
+}
+
 /* --- SUBJECT GRID & CARDS shi --- */
 .subject-grid {
     display: grid;
