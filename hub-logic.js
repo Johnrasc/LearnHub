@@ -1,3 +1,31 @@
+window.onload = () => {
+    const loader = document.getElementById('loader');
+    setTimeout(() => {
+        loader.style.opacity = '0';
+        setTimeout(() => loader.style.display = 'none', 800);
+    }, 1600);
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const quizLinks = document.querySelectorAll('.action-btn.quiz');
+    const loader = document.getElementById('quiz-loader');
+
+    quizLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Prevent the browser from leaving the page immediately
+            e.preventDefault();
+            const destination = this.getAttribute('href');
+
+            // Show the loading screen
+            loader.style.display = 'flex';
+
+            // Wait for the animation to finish (1.5s)
+            setTimeout(() => {
+                window.location.href = destination;
+            }, 1500); 
+        });
+    });
+});
 
 const searchInput = document.querySelector('#searchInput');
 const searchGlow = document.querySelector('.search-glow');
@@ -23,7 +51,7 @@ function filterCards() {
         
         if (title.includes(input) || code.includes(input)) {
             card.style.display = "flex";
-            // Gentle fade-in
+            // fade-in
             setTimeout(() => { card.style.opacity = "1"; }, 10);
         } else {
             card.style.opacity = "0";
