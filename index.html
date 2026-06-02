@@ -3,263 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LearnHub | Premium</title>
+    <title>LearnHub // Academic Examination Repositories</title>
     <link rel="stylesheet" href="hub-style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
 </head>
 <body>
+
     <div id="loader">
         <div class="loader-content">
-            <div class="glitch-text" data-text="INITIALIZING...">LOADING...</div>
-            <div class="loading-bar"><div class="fill"></div></div>
+            <div class="loader-title">LEARNHUB</div>
+            <div class="loader-line-bar"><div class="fill-line"></div></div>
         </div>
     </div>
 
-    <div id="quiz-loader" class="quiz-loader-overlay">
-        <div class="loader-content">
-            <div class="glitch-text" data-text="ACCESSING MODULE...">ACCESSING QUIZ REVIEWER...</div>
-            <div class="loading-bar">
-                <div class="loading-fill"></div>
+    <div id="quiz-loader" class="quiz-overlay">
+        <div class="quiz-overlay-box">
+            <div class="spinner"></div>
+            <div class="overlay-title">Retrieving Examination Script</div>
+            <p class="overlay-subtitle">Organizing quiz modules, please maintain connectivity...</p>
+        </div>
+    </div>
+
+    <div class="paper-wrapper">
+        <header class="paper-header">
+            <div class="header-top-row">
+                <span class="meta-stamp">ARCHIVE COLLECTION // SY 2025-2026</span>
+                <span class="meta-stamp status">SYSTEM STATUS: READY</span>
             </div>
-            <p class="loader-sub">Etoh na reviewer mo chilllll...</p>
-        </div>
-    </div>
-
-    <canvas id="bg-animation"></canvas>
-
-    <div class="hub-container">
-        <header>
-            <div class="badge">SY 2025-2026</div>
-            <h1 class="glitch-text" data-text="LEARNHUB">Learn<span>Hub</span></h1>
-            <p class="subtitle">Integrated Academic Resource Dashboard</p>
             
-            <div class="search-wrapper">
-                <input type="text" id="searchInput" placeholder="Search your subject..." onkeyup="filterCards()">
-                <div class="search-glow"></div>
+            <h1 class="brand-heading">Learn<span>Hub</span></h1>
+            <p class="brand-description">A minimal, structured reading space for academic evaluation modules and comprehensive examination review indices.</p>
+            
+            <div class="search-section">
+                <div class="search-field-frame">
+                    <input type="text" id="searchInput" placeholder="Type to search modules (e.g. Software Design, Ethics)..." onkeyup="filterCards()">
+                    <span class="search-indicator-dot"></span>
+                </div>
             </div>
 
-            <div class="filter-tabs">
-                <button class="filter-btn active" onclick="filterTerm('all')">All</button>
-                <button button class="filter-btn" onclick="filterTerm('midterm')">Midterm</button>
-                <button class="filter-btn" onclick="filterTerm('prefinals')">Prefinals</button>
+            <div class="navigation-tabs">
+                <button class="tab-pill active" onclick="filterTerm('all')">All Syllabi</button>
+                <button class="tab-pill" onclick="filterTerm('midterm')">Midterm Units</button>
+                <button class="tab-pill" onclick="filterTerm('prefinals')">Prefinal Units</button>
+                <button class="tab-pill" onclick="filterTerm('finals')">Final Units</button>
             </div>
         </header>
 
-        <main class="subject-grid" id="subjectGrid">
+        <main class="document-matrix" id="subjectGrid">
 
-            <div class="subject-card">
-                <div class="card-icon">NEW</div>
-                <div class="card-content">
-                    <span class="subject-code">Prefinals</span>
+            <div class="quiz-sheet-card prefinals-card">
+                <div class="sheet-meta">
+                    <span class="classification-tag prefi">Prefinals Section</span>
+                    <span class="serial-no">REF // 01</span>
+                </div>
+                <div class="sheet-body">
                     <h3>Software Design</h3>
-                    <p>Explores the key details and aspects of software design principles and practices.</p>
+                    <p>Explores the key details and aspects of software design principles, pattern workflows, and structural system paradigms.</p>
                 </div>
-                <div class="card-actions">
-                    <a href="Software-Design-Prefi/sd-prefi.html" class="action-btn quiz">Quiz</a>
-                    <button class="action-btn more" onclick="toggleMenu('Software Design')">•••</button>
+                <div class="sheet-controls unified">
+                    <a href="Software-Design-Prefi/sd-prefi.html" class="sheet-btn primary-action">Begin Examination</a>
+                    <button class="sheet-btn icon-action" onclick="toggleMenu('Software Design')">⚙</button>
                 </div>
             </div>
 
-            <div class="subject-card">
-                <div class="card-icon">NEW</div>
-                <div class="card-content">
-                    <span class="subject-code">Prefinals</span>
+            <div class="quiz-sheet-card prefinals-card">
+                <div class="sheet-meta">
+                    <span class="classification-tag prefi">Prefinals Section</span>
+                    <span class="serial-no">REF // 02</span>
+                </div>
+                <div class="sheet-body">
                     <h3>Engineering Data Analysis</h3>
-                    <p>Explores the key details and aspects of engineering data analysis.</p>
+                    <p>Explores the key details and aspects of engineering data analysis, experimental probability distribution, and statistical metrics.</p>
                 </div>
-                <div class="card-actions">
-                    <a href="EDA-PREFI/eda-mid.html" class="action-btn quiz">Quiz</a>
-                    <button class="action-btn more" onclick="toggleMenu('Engineering Data Analysis')">•••</button>
+                <div class="sheet-controls unified">
+                    <a href="EDA-PREFI/eda-mid.html" class="sheet-btn primary-action">Begin Examination</a>
+                    <button class="sheet-btn icon-action" onclick="toggleMenu('Engineering Data Analysis')">⚙</button>
                 </div>
             </div>
 
-            <div class="subject-card">
-                <div class="card-icon">NEW</div>
-                <div class="card-content">
-                    <span class="subject-code">Prefinals</span>
+            <div class="quiz-sheet-card prefinals-card">
+                <div class="sheet-meta">
+                    <span class="classification-tag prefi">Prefinals Section</span>
+                    <span class="serial-no">REF // 03</span>
+                </div>
+                <div class="sheet-body">
                     <h3>Object Oriented Programming</h3>
-                    <p>Explores the key details and aspects of object-oriented programming concepts and practices.</p>
+                    <p>Explores the key details and aspects of object-oriented programming concepts, abstraction layers, encapsulation, and practices.</p>
                 </div>
-                <div class="card-actions">
-                    <a href="OOP-PREFI/oop-prefi.html" class="action-btn quiz">Quiz</a>
-                    <button class="action-btn more" onclick="toggleMenu('Object Oriented Programming')">•••</button>
+                <div class="sheet-controls unified">
+                    <a href="OOP-PREFI/oop-prefi.html" class="sheet-btn primary-action">Begin Examination</a>
+                    <button class="sheet-btn icon-action" onclick="toggleMenu('Object Oriented Programming')">⚙</button>
                 </div>
             </div>
 
-            <div class="subject-card">
-                <div class="card-icon">11</div>
-                <div class="card-content">
-                    <span class="subject-code">Prefinals</span>
+            <div class="quiz-sheet-card prefinals-card">
+                <div class="sheet-meta">
+                    <span class="classification-tag prefi">Prefinals Section</span>
+                    <span class="serial-no">REF // 04</span>
+                </div>
+                <div class="sheet-body">
                     <h3>Fundamentals of Electronics Circuits</h3>
-                    <p>Explores the key details and aspects of electronics circuits.</p>
+                    <p>Explores the key details and aspects of electronics circuits, semiconductor diode metrics, and load networks.</p>
                 </div>
-                <div class="card-actions">
-                    <a href="FOEC2-PREFI/foec2.html" class="action-btn quiz">Quiz</a>
-                    <button class="action-btn more" onclick="toggleMenu('Fundamentals of Electronics Circuits')">•••</button>
+                <div class="sheet-controls unified">
+                    <a href="FOEC2-PREFI/foec2.html" class="sheet-btn primary-action">Begin Examination</a>
+                    <button class="sheet-btn icon-action" onclick="toggleMenu('Fundamentals of Electronics Circuits')">⚙</button>
                 </div>
             </div>
 
-            <div class="subject-card">
-                <div class="card-icon">10</div>
-                <div class="card-content">
-                    <span class="subject-code">Prefinals</span>
+            <div class="quiz-sheet-card prefinals-card">
+                <div class="sheet-meta">
+                    <span class="classification-tag prefi">Prefinals Section</span>
+                    <span class="serial-no">REF // 05</span>
+                </div>
+                <div class="sheet-body">
                     <h3>Numerical Methods</h3>
-                    <p>Mathematical algorithms for complex engineering computations.</p>
+                    <p>Mathematical approximation techniques, iterative processing, and algorithmic formulations for engineering computations.</p>
                 </div>
-                <div class="card-actions">
-                    <a href="Numerical-Method-Prefi/numerical-methods.html" class="action-btn quiz">Quiz</a>
-                    <button class="action-btn more" onclick="toggleMenu('Numerical Methods')">•••</button>
+                <div class="sheet-controls unified">
+                    <a href="Numerical-Method-Prefi/numerical-methods.html" class="sheet-btn primary-action">Begin Examination</a>
+                    <button class="sheet-btn icon-action" onclick="toggleMenu('Numerical Methods')">⚙</button>
                 </div>
             </div>
 
-            <div class="subject-card">
-                <div class="card-icon">09</div>
-                <div class="card-content">
-                    <span class="subject-code">Prefinals</span>
+            <div class="quiz-sheet-card prefinals-card">
+                <div class="sheet-meta">
+                    <span class="classification-tag prefi">Prefinals Section</span>
+                    <span class="serial-no">REF // 06</span>
+                </div>
+                <div class="sheet-body">
                     <h3>Ethics</h3>
-                    <p>Examines the principles of bioethics, focusing on the ethical issues in healthcare, medical decision-making, patient rights, AI ethics, and Ethical Communication</p>
+                    <p>Examines the principles of bioethics, focusing on the ethical issues in healthcare, medical decision-making, patient rights, AI ethics, and Ethical Communication.</p>
                 </div>
-                <div class="card-actions">
-                    <a href="ETHICS-PREFI/ethics3.html" class="action-btn quiz">Quiz</a>
-                    <a href="assets/pdf/ethics-prefi.pdf" target="_blank" class="action-btn pdf">PDF</a>
-                    <button class="action-btn more" onclick="toggleMenu('Ethics')">•••</button>
+                <div class="sheet-controls split">
+                    <a href="ETHICS-PREFI/ethics3.html" class="sheet-btn primary-action">Begin Quiz</a>
+                    <a href="assets/pdf/ethics-prefi.pdf" target="_blank" class="sheet-btn standard-action">View Text PDF</a>
+                    <button class="sheet-btn icon-action" onclick="toggleMenu('Ethics')">⚙</button>
                 </div>
             </div>
 
-            <div class="subject-card">
-                <div class="card-icon">08</div>
-                <div class="card-content">
-                    <span class="subject-code">Prefinals</span>
+            <div class="quiz-sheet-card prefinals-card">
+                <div class="sheet-meta">
+                    <span class="classification-tag prefi">Prefinals Section</span>
+                    <span class="serial-no">REF // 07</span>
+                </div>
+                <div class="sheet-body">
                     <h3>Philippine Popular Culture</h3>
-                    <p>Explores the cultural, social, and historical aspects of Philippine popular culture.</p>
+                    <p>Explores the cultural, media, social representations, and historical aspects of modern Philippine popular culture transformations.</p>
                 </div>
-                <div class="card-actions">
-                    <a href="PPC-PREFI/ppc3.html" class="action-btn quiz">Quiz</a>
-                    <a href="assets/pdf/ppc-prefi.pdf" target="_blank" class="action-btn pdf">PDF</a>
-                    <button class="action-btn more" onclick="toggleMenu('Philippine Popular Culture')">•••</button>
+                <div class="sheet-controls split">
+                    <a href="PPC-PREFI/ppc3.html" class="sheet-btn primary-action">Begin Quiz</a>
+                    <a href="assets/pdf/ppc-prefi.pdf" target="_blank" class="sheet-btn standard-action">View Text PDF</a>
+                    <button class="sheet-btn icon-action" onclick="toggleMenu('Philippine Popular Culture')">⚙</button>
                 </div>
             </div>
 
-            <div class="subject-card">
-                <div class="card-icon">07</div>
-                <div class="card-content">
-                    <span class="subject-code">Prefinals</span>
+            <div class="quiz-sheet-card prefinals-card">
+                <div class="sheet-meta">
+                    <span class="classification-tag prefi">Prefinals Section</span>
+                    <span class="serial-no">REF // 08</span>
+                </div>
+                <div class="sheet-body">
                     <h3>Great Books</h3>
-                    <p>Explores the cultural, social, and historical aspects of great literature.</p>
+                    <p>Explores the cultural, social, and narrative aspects of foundational literature frameworks and global masterpieces.</p>
                 </div>
-                <div class="card-actions">
-                    <a href="GB-PREFI/gb3.html" class="action-btn quiz">Quiz</a>
-                    <a href="assets/pdf/gb-prefi.pdf" target="_blank" class="action-btn pdf">PDF</a>
-                    <button class="action-btn more" onclick="toggleMenu('Great Books')">•••</button>
+                <div class="sheet-controls split">
+                    <a href="GB-PREFI/gb3.html" class="sheet-btn primary-action">Begin Quiz</a>
+                    <a href="assets/pdf/gb-prefi.pdf" target="_blank" class="sheet-btn standard-action">View Text PDF</a>
+                    <button class="sheet-btn icon-action" onclick="toggleMenu('Great Books')">⚙</button>
                 </div>
             </div>
 
-            <div class="subject-card">
-                <div class="card-icon">06</div>
-                <div class="card-content">
-                    <span class="subject-code">Prefinals</span>
-                    <h3>Technopreneurship</h3>
-                    <p>Explores the key details and aspects of technopreneurship.</p>
+            <div class="quiz-sheet-card prefinals-card">
+                <div class="sheet-meta">
+                    <span class="classification-tag prefi">Prefinals Section</span>
+                    <span class="serial-no">REF // 09</span>
                 </div>
-                <div class="card-actions">
-                    <a href="TECHNO-PREFI/techno3.html" class="action-btn quiz">Quiz</a>
-                    <a href="assets/pdf/techno-prefi.pdf" target="_blank" class="action-btn pdf">PDF</a>
-                    <button class="action-btn more" onclick="toggleMenu('Technopreneurship')">•••</button>
+                <div class="sheet-body">
+                    <h3>Technopreneurship</h3>
+                    <p>Explores the business architecture dynamics, high-tech engineering venture tracking, and aspects of technopreneurship.</p>
+                </div>
+                <div class="sheet-controls split">
+                    <a href="TECHNO-PREFI/quiz_techno.html" class="sheet-btn primary-action">Begin Quiz</a>
+                    <a href="assets/pdf/techno-prefi.pdf" target="_blank" class="sheet-btn standard-action">View Text PDF</a>
+                    <button class="sheet-btn icon-action" onclick="toggleMenu('Technopreneurship')">⚙</button>
                 </div>
             </div>
             
-            <div class="subject-card">
-                <div class="card-icon">05</div>
-                <div class="card-content">
-                    <span class="subject-code">Midterm</span>
-                    <h3>Great Books</h3>
-                    <p>Exploring classical literature and world-changing narratives.</p>
+            <div class="quiz-sheet-card midterm-card">
+                <div class="sheet-meta">
+                    <span class="classification-tag midterm">Midterm Section</span>
+                    <span class="serial-no">REF // 10</span>
                 </div>
-                <div class="card-actions">
-                    <a href="Great-Books-Mid/GB.html" class="action-btn quiz">Quiz</a>
-                    <a href="assets/pdf/gb-mid.pdf" target="_blank" class="action-btn pdf">PDF</a>
-                    <button class="action-btn more" onclick="toggleMenu('Great Books')">•••</button>
+                <div class="sheet-body">
+                    <h3>Great Books (Midterm Focus)</h3>
+                    <p>Exploring classical literature structures, archetypal analyses, and world-changing narratives.</p>
                 </div>
-            </div>
-
-            <div class="subject-card">
-                <div class="card-icon">04</div>
-                <div class="card-content">
-                    <span class="subject-code">Midterm</span>
-                    <h3>Numerical Methods</h3>
-                    <p>Mathematical algorithms for complex engineering computations.</p>
-                </div>
-                <div class="card-actions">
-                    <a href="Numerical-Method-Mid/numerical-methods.html" class="action-btn quiz">Quiz</a>
-                    <a href="assets/pdf/nm-mid.pdf" target="_blank" class="action-btn pdf">PDF</a>
-                    <button class="action-btn more" onclick="toggleMenu('Numerical Methods')">•••</button>
+                <div class="sheet-controls split">
+                    <a href="Great-Books-Mid/GB.html" class="sheet-btn primary-action">Begin Quiz</a>
+                    <a href="assets/pdf/gb-mid.pdf" target="_blank" class="sheet-btn standard-action">View Text PDF</a>
+                    <button class="sheet-btn icon-action" onclick="toggleMenu('Great Books')">⚙</button>
                 </div>
             </div>
 
-            <div class="subject-card">
-                <div class="card-icon">03</div>
-                <div class="card-content">
-                    <span class="subject-code">Midterm</span>
+            <div class="quiz-sheet-card midterm-card">
+                <div class="sheet-meta">
+                    <span class="classification-tag midterm">Midterm Section</span>
+                    <span class="serial-no">REF // 11</span>
+                </div>
+                <div class="sheet-body">
+                    <h3>Numerical Methods (Midterm Focus)</h3>
+                    <p>Mathematical algorithms, error evaluations, root-finding methods, and linear engineering operations.</p>
+                </div>
+                <div class="sheet-controls split">
+                    <a href="Numerical-Method-Mid/numerical-methods.html" class="sheet-btn primary-action">Begin Quiz</a>
+                    <a href="assets/pdf/nm-mid.pdf" target="_blank" class="sheet-btn standard-action">View Text PDF</a>
+                    <button class="sheet-btn icon-action" onclick="toggleMenu('Numerical Methods')">⚙</button>
+                </div>
+            </div>
+
+            <div class="quiz-sheet-card midterm-card">
+                <div class="sheet-meta">
+                    <span class="classification-tag midterm">Midterm Section</span>
+                    <span class="serial-no">REF // 12</span>
+                </div>
+                <div class="sheet-body">
                     <h3>Fundamentals of Electronics Circuits</h3>
-                    <p>Circuit analysis, semiconductor devices, and signal processing.</p>
+                    <p>Circuit node analysis, operational amplifier parameters, and semiconductor devices.</p>
                 </div>
-                <div class="card-actions">
-                    <a href="FOEC2-Mid/foec2.html" class="action-btn quiz">Quiz</a>
-                    <a href="assets/pdf/foec-mid.pdf" target="_blank" class="action-btn pdf">PDF</a>
-                    <button class="action-btn more" onclick="toggleMenu('Fundamentals of Electronics Circuits')">•••</button>
+                <div class="sheet-controls split">
+                    <a href="FOEC2-Mid/foec2.html" class="sheet-btn primary-action">Begin Quiz</a>
+                    <a href="assets/pdf/foec-mid.pdf" target="_blank" class="sheet-btn standard-action">View Text PDF</a>
+                    <button class="sheet-btn icon-action" onclick="toggleMenu('Fundamentals of Electronics Circuits')">⚙</button>
                 </div>
             </div>
 
-            <div class="subject-card">
-                <div class="card-icon">02</div>
-                <div class="card-content">
-                    <span class="subject-code">Midterm</span>
+            <div class="quiz-sheet-card midterm-card">
+                <div class="sheet-meta">
+                    <span class="classification-tag midterm">Midterm Section</span>
+                    <span class="serial-no">REF // 13</span>
+                </div>
+                <div class="sheet-body">
                     <h3>Engineering Data Analysis</h3>
-                    <p>Statistical methods and engineering data visualization.</p>
+                    <p>Statistical processing parameters, regression arrays, and engineering data calculation modes.</p>
                 </div>
-                <div class="card-actions">
-                    <a href="EDA-Mid/eda-mid.html" class="action-btn quiz">Quiz</a>
-                    <a href="assets/pdf/eda-mid.pdf" target="_blank" class="action-btn pdf">PDF</a>
-                    <button class="action-btn more" onclick="toggleMenu('Data Analysis')">•••</button>
+                <div class="sheet-controls split">
+                    <a href="EDA-Mid/eda-mid.html" class="sheet-btn primary-action">Begin Quiz</a>
+                    <a href="assets/pdf/eda-mid.pdf" target="_blank" class="sheet-btn standard-action">View Text PDF</a>
+                    <button class="sheet-btn icon-action" onclick="toggleMenu('Data Analysis')">⚙</button>
                 </div>
             </div>
 
-            <div class="subject-card">
-                <div class="card-icon">01</div>
-                <div class="card-content">
-                    <span class="subject-code">Midterm</span>
-                    <h3>Software Design</h3>
-                    <p>Principles and practices of software system design.</p>
+            <div class="quiz-sheet-card midterm-card">
+                <div class="sheet-meta">
+                    <span class="classification-tag midterm">Midterm Section</span>
+                    <span class="serial-no">REF // 14</span>
                 </div>
-                <div class="card-actions">
-                    <a href="Software-Design-Mid/sd-mid.html" class="action-btn quiz">Quiz</a>
-                    <a href="assets/pdf/sd-mid.pdf" target="_blank" class="action-btn pdf">PDF</a>
-                    <button class="action-btn more" onclick="toggleMenu('Software Design')">•••</button>
+                <div class="sheet-body">
+                    <h3>Software Design (Midterm Focus)</h3>
+                    <p>Object-oriented models, behavioral structures, design patterns, and systemic blueprint specifications.</p>
+                </div>
+                <div class="sheet-controls split">
+                    <a href="Software-Design-Mid/sd-mid.html" class="sheet-btn primary-action">Begin Quiz</a>
+                    <a href="assets/pdf/sd-mid.pdf" target="_blank" class="sheet-btn standard-action">View Text PDF</a>
+                    <button class="sheet-btn icon-action" onclick="toggleMenu('Software Design')">⚙</button>
+                </div>
+            </div>
+
+            <div class="quiz-sheet-card finals-card">
+                <div class="sheet-meta">
+                    <span class="classification-tag finals">Finals Section</span>
+                    <span class="serial-no">REF // 01</span>
+                </div>
+                <div class="sheet-body">
+                    <h3>Great Books</h3>
+                    <p>Explores the cultural, social, and narrative aspects of foundational literature frameworks and global masterpieces.</p>
+                </div>
+                <div class="sheet-controls split">
+                    <a href="GB-F/gb3.html" class="sheet-btn primary-action">Begin Quiz</a>
+                    <a href="assets/pdf/gb-f.pdf" target="_blank" class="sheet-btn standard-action">View Text PDF</a>
+                    <button class="sheet-btn icon-action" onclick="toggleMenu('Great Books')">⚙</button>
                 </div>
             </div>
 
         </main>
 
-        <footer class="hub-footer">
-            <div class="footer-line"></div>
-            <div class="footer-content">
-                <div class="footer-left">
-                    <span class="status-dot"></span> SYSTEM OPERATIONAL
+        <footer class="sheet-footer">
+            <div class="footer-meta-line"></div>
+            <div class="footer-layout">
+                <div class="foot-col">
+                    <span class="ledger-mark"></span> SECURITY REGISTRY INTACT
                 </div>
-                <div class="footer-center">
-                    &copy; 2026 LearnHub // 🍀
+                <div class="foot-col center">
+                    &copy; 2026 LEARNHUB // PRINT SYLLABUS EDITORIAL SYSTEM
                 </div>
-                <div class="footer-right">
-                    V 1.1.5 - STABLE
+                <div class="foot-col right">
+                    VERSION 4.0 (STATIC CORE)
                 </div>
             </div>
         </footer>
     </div>
 
-    <script src="hub-animation.js"></script>
     <script src="hub-logic.js"></script>
 </body>
 </html>
