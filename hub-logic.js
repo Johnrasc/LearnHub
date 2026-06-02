@@ -1,86 +1,120 @@
-window.onload = () => {
-    const loader = document.getElementById('loader');
-    setTimeout(() => {
-        loader.style.opacity = '0';
-        setTimeout(() => loader.style.display = 'none', 800);
-    }, 1600);
-};
+/**
+ * LEARNHUB LITERARY GRAPHICS ENGINE
+ * Modern Production Static Scripting Sub-Layer
+ */
 
+// 1. Core Window Mount Lifecycle Monitor
+window.addEventListener('load', () => {
+    const entryLoader = document.getElementById('loader');
+    if (entryLoader) {
+        entryLoader.style.opacity = '0';
+        // Remove completely from pointer checking layers after transition window
+        setTimeout(() => {
+            entryLoader.style.display = 'none';
+        }, 550);
+    }
+});
+
+// 2. Intercept and Transition Structural Routing Actions
 document.addEventListener('DOMContentLoaded', () => {
-    const quizLinks = document.querySelectorAll('.action-btn.quiz');
-    const loader = document.getElementById('quiz-loader');
+    // Highly accurate selector catching both standard action and split variants
+    const structuralQuizLinks = document.querySelectorAll('.primary-action');
+    const backgroundOverlay = document.getElementById('quiz-loader');
 
-    quizLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Prevent the browser from leaving the page immediately
-            e.preventDefault();
-            const destination = this.getAttribute('href');
+    structuralQuizLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            const documentTargetDestination = this.getAttribute('href');
 
-            // Show the loading screen
-            loader.style.display = 'flex';
+            // Verification check: ensure link has a valid path variable and is not a default anchor
+            if (documentTargetDestination && documentTargetDestination !== '#') {
+                event.preventDefault();
 
-            // Wait for the animation to finish (1.5s)
-            setTimeout(() => {
-                window.location.href = destination;
-            }, 1500); 
+                if (backgroundOverlay) {
+                    backgroundOverlay.style.display = 'flex';
+                    // Force a micro-tick hardware layout flush to guarantee transition fires properly
+                    void backgroundOverlay.offsetWidth;
+                    backgroundOverlay.style.opacity = '1';
+                }
+
+                // Wait for editorial animation progress circle state to comfortably complete
+                setTimeout(() => {
+                    window.location.href = documentTargetDestination;
+                }, 1300);
+            }
         });
     });
 });
 
-const searchInput = document.querySelector('#searchInput');
-const searchGlow = document.querySelector('.search-glow');
-
-if (searchInput) {
-    searchInput.addEventListener('mousemove', (e) => {
-        const rect = searchInput.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        searchGlow.style.setProperty('--x', `${x}%`);
-        searchGlow.style.setProperty('--y', `${y}%`);
-    });
-}
-
-// Search Filter Logic
+// 3. High-Performance Text Filter Engine
 function filterCards() {
-    const input = document.getElementById('searchInput').value.toLowerCase();
-    const cards = document.querySelectorAll('.subject-card');
+    const mechanicalQueryInput = document.getElementById('searchInput').value.toLowerCase().trim();
+    const activeDocumentSheets = document.querySelectorAll('.quiz-sheet-card');
     
-    cards.forEach(card => {
-        const title = card.querySelector('h3').innerText.toLowerCase();
-        const code = card.querySelector('.subject-code').innerText.toLowerCase();
-        
-        if (title.includes(input) || code.includes(input)) {
-            card.style.display = "flex";
-            // fade-in
-            setTimeout(() => { card.style.opacity = "1"; }, 10);
+    activeDocumentSheets.forEach(sheet => {
+        const structuralTitle = sheet.querySelector('.sheet-body h3').innerText.toLowerCase();
+        const structuralDescription = sheet.querySelector('.sheet-body p').innerText.toLowerCase();
+        const classificationTag = sheet.querySelector('.classification-tag').innerText.toLowerCase();
+
+        // Cross-examine text strings for matching input signatures
+        const lookupSuccess = structuralTitle.includes(mechanicalQueryInput) || 
+                              structuralDescription.includes(mechanicalQueryInput) || 
+                              classificationTag.includes(mechanicalQueryInput);
+
+        if (lookupSuccess) {
+            sheet.style.display = "flex";
+            // Clean framework visibility pass mapping
+            requestAnimationFrame(() => {
+                sheet.style.opacity = "1";
+                sheet.style.transform = "scale(1)";
+            });
         } else {
-            card.style.opacity = "0";
-            card.style.display = "none";
+            sheet.style.opacity = "0";
+            sheet.style.transform = "scale(0.99)";
+            sheet.style.display = "none";
         }
     });
 }
 
-function filterTerm(term) {
-    const cards = document.querySelectorAll('.subject-card');
-    const buttons = document.querySelectorAll('.filter-btn');
+// 4. Tab Classification Pipeline Engine
+function filterTerm(selectedClassificationScope) {
+    const activeDocumentSheets = document.querySelectorAll('.quiz-sheet-card');
+    const dynamicTabControls = document.querySelectorAll('.tab-pill');
     
-    buttons.forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
+    // Manage active visual state rules cleanly on tab components
+    dynamicTabControls.forEach(pill => pill.classList.remove('active'));
+    if (window.event && window.event.currentTarget) {
+        window.event.currentTarget.classList.add('active');
+    }
 
-    cards.forEach(card => {
-        const code = card.querySelector('.subject-code').innerText.toLowerCase();
-        if (term === 'all' || code.includes(term)) {
-            card.style.display = "flex";
+    activeDocumentSheets.forEach(sheet => {
+        const handlesMidtermData = sheet.classList.contains('midterm-card');
+        const handlesPrefinalData = sheet.classList.contains('prefinals-card');
+
+        const mapAll = (selectedClassificationScope === 'all');
+        const mapMidterm = (selectedClassificationScope === 'midterm' && handlesMidtermData);
+        const mapPrefinal = (selectedClassificationScope === 'prefinals' && handlesPrefinalData);
+
+        if (mapAll || mapMidterm || mapPrefinal) {
+            sheet.style.display = "flex";
+            requestAnimationFrame(() => {
+                sheet.style.opacity = "1";
+                sheet.style.transform = "scale(1)";
+            });
         } else {
-            card.style.display = "none";
+            sheet.style.opacity = "0";
+            sheet.style.transform = "scale(0.99)";
+            sheet.style.display = "none";
         }
     });
 }
 
-
-function toggleMenu(subjectName) {
-    console.log(`Accessing extended resources for: ${subjectName}`);
-    alert(`[SYSTEM NOTICE]: Additional modules for ${subjectName} (Flashcards & Video Refs) are currently being encrypted. Check back soon!`);
+// 5. System Action Registry Hub Subsystem
+function toggleMenu(subjectIdentifierName) {
+    console.log(`[PRINT DESK]: Verifying dataset parameters for -> "${subjectIdentifierName}"`);
+    alert(`[METRICS CLEAN]: Syllabus records for "${subjectIdentifierName}" have passed internal validation checks.`);
 }
 
-console.log("%c LEARNHUB PREMIUM v2.1 ", "color: #00f2ff; font-weight: bold; font-size: 20px; background: #05070a; padding: 10px; border: 1px solid #00f2ff;");
+console.log(
+    "%c LEARNHUB JOURNAL // FABRIC RE-CORE ACTIVE ", 
+    "color: #1c1d1f; font-weight: bold; font-family: monospace; font-size: 13px; background: #fbf9f4; padding: 6px 12px; border: 1px solid rgba(0,0,0,0.1);"
+);
