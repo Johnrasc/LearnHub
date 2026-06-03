@@ -1,6 +1,6 @@
 /**
  * LEARNHUB LITERARY GRAPHICS ENGINE
- * Modern Production Static Scripting Sub-Layer
+ * Modern Production Static Scripting Sub-Layer // RE-CORE v4.4
  */
 
 // 1. Core Window Mount Lifecycle Monitor
@@ -32,56 +32,42 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (backgroundOverlay) {
                     backgroundOverlay.style.display = 'flex';
                     // Force a micro-tick hardware layout flush to guarantee transition fires properly
-                    void backgroundOverlay.offsetWidth;
+                    void backgroundOverlay.offsetWidth; 
                     backgroundOverlay.style.opacity = '1';
                 }
 
-                // Wait for editorial animation progress circle state to comfortably complete
+                // Smooth out editorial visual flow with brief synthetic scheduling
                 setTimeout(() => {
                     window.location.href = documentTargetDestination;
-                }, 1300);
+                }, 950);
             }
         });
     });
 });
 
-// 3. High-Performance Text Filter Engine
-function filterCards() {
-    const mechanicalQueryInput = document.getElementById('searchInput').value.toLowerCase().trim();
-    const activeDocumentSheets = document.querySelectorAll('.quiz-sheet-card');
-    
-    activeDocumentSheets.forEach(sheet => {
-        const structuralTitle = sheet.querySelector('.sheet-body h3').innerText.toLowerCase();
-        const structuralDescription = sheet.querySelector('.sheet-body p').innerText.toLowerCase();
-        const classificationTag = sheet.querySelector('.classification-tag').innerText.toLowerCase();
-
-        // Cross-examine text strings for matching input signatures
-        const lookupSuccess = structuralTitle.includes(mechanicalQueryInput) || 
-                              structuralDescription.includes(mechanicalQueryInput) || 
-                              classificationTag.includes(mechanicalQueryInput);
-
-        if (lookupSuccess) {
-            sheet.style.display = "flex";
-            // Clean framework visibility pass mapping
-            requestAnimationFrame(() => {
-                sheet.style.opacity = "1";
-                sheet.style.transform = "scale(1)";
-            });
-        } else {
-            sheet.style.opacity = "0";
-            sheet.style.transform = "scale(0.99)";
-            sheet.style.display = "none";
+// 3. Document Layer Global State Adjustments
+window.addEventListener('pageshow', (event) => {
+    // Check if the page is loading directly from back/forward structural caches
+    if (event.persisted) {
+        const backgroundOverlay = document.getElementById('quiz-loader');
+        if (backgroundOverlay) {
+            backgroundOverlay.style.opacity = '0';
+            setTimeout(() => {
+                backgroundOverlay.style.display = 'none';
+            }, 300);
         }
-    });
-}
+    }
+});
 
-// 4. Tab Classification Pipeline Engine
-function filterTerm(selectedClassificationScope) {
-    const activeDocumentSheets = document.querySelectorAll('.quiz-sheet-card');
-    const dynamicTabControls = document.querySelectorAll('.tab-pill');
-    
-    // Manage active visual state rules cleanly on tab components
-    dynamicTabControls.forEach(pill => pill.classList.remove('active'));
+// 4. Classification Deck Sorting State Controller
+function filterSyllabiClassification(selectedClassificationScope) {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const activeDocumentSheets = document.querySelectorAll('.document-sheet');
+
+    // Reset current active presentation highlights inside filter track
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+
+    // Handle direct DOM interactions or contextual event hooks safely
     if (window.event && window.event.currentTarget) {
         window.event.currentTarget.classList.add('active');
     }
@@ -89,12 +75,15 @@ function filterTerm(selectedClassificationScope) {
     activeDocumentSheets.forEach(sheet => {
         const handlesMidtermData = sheet.classList.contains('midterm-card');
         const handlesPrefinalData = sheet.classList.contains('prefinals-card');
+        const handlesFinalsData = sheet.classList.contains('finals-card');
 
+        // FIXED: Expanded structural configuration mapping for the Finals matrix
         const mapAll = (selectedClassificationScope === 'all');
         const mapMidterm = (selectedClassificationScope === 'midterm' && handlesMidtermData);
         const mapPrefinal = (selectedClassificationScope === 'prefinals' && handlesPrefinalData);
+        const mapFinals = (selectedClassificationScope === 'finals' && handlesFinalsData);
 
-        if (mapAll || mapMidterm || mapPrefinal) {
+        if (mapAll || mapMidterm || mapPrefinal || mapFinals) {
             sheet.style.display = "flex";
             requestAnimationFrame(() => {
                 sheet.style.opacity = "1";
@@ -116,5 +105,5 @@ function toggleMenu(subjectIdentifierName) {
 
 console.log(
     "%c LEARNHUB JOURNAL // FABRIC RE-CORE ACTIVE ", 
-    "color: #1c1d1f; font-weight: bold; font-family: monospace; font-size: 13px; background: #fbf9f4; padding: 6px 12px; border: 1px solid rgba(0,0,0,0.1);"
+    "color: #1c1d1f; font-weight: bold; background: #fbf9f4; padding: 4px 8px; border: 1px solid rgba(28,29,31,0.1);"
 );
