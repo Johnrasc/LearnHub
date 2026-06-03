@@ -359,6 +359,7 @@ const questionsData = [
 let masterActiveArray = [];
 let currentIndex = 0;
 let savedUserAnswers = []; 
+// FIXED: Raised to 10 token pools globally
 let availableHintTokens = 10;
 let initialPlayTriggered = false;
 
@@ -385,7 +386,6 @@ window.addEventListener('load', () => {
     }
     initializeReviewerContext();
     
-    // Global safety listener: Automatically boots up background audio on any first gesture
     window.addEventListener('click', ensureBackgroundMusicPlays, { once: true });
     window.addEventListener('keydown', ensureBackgroundMusicPlays, { once: true });
 });
@@ -398,6 +398,7 @@ function initializeReviewerContext() {
     }
     
     savedUserAnswers = new Array(masterActiveArray.length).fill(null);
+    // FIXED: Synchronized setup state mapping to print 10 on text node injection layers
     availableHintTokens = 10;
     domHintCount.innerText = availableHintTokens;
     
@@ -472,7 +473,6 @@ function evaluateSelectedOption(selectedIdx, targetNode) {
 
     lockAndExposeSheetResults(selectedIdx);
     
-    // Clean audio tracking evaluation channel
     if (selectedIdx === correctIndex) {
         triggerHapticSound('snd-correct');
     } else {
@@ -566,9 +566,6 @@ function renderTerminalSummaryReport() {
     });
 }
 
-/**
- * Robust background audio ignition bypasses strict browser initialization blocks
- */
 function ensureBackgroundMusicPlays() {
     if (initialPlayTriggered) return;
     const track = document.getElementById('bg-focus-music');
@@ -577,7 +574,6 @@ function ensureBackgroundMusicPlays() {
         track.muted = false; 
         track.play().then(() => {
             initialPlayTriggered = true;
-            // Align style setup metrics instantly if already playing
             const btn = document.getElementById('audioToggleBtn');
             if (btn) {
                 btn.innerHTML = `<span class="audio-icon">🔊</span> MUSIC: ON`;
@@ -588,16 +584,12 @@ function ensureBackgroundMusicPlays() {
     }
 }
 
-/**
- * FIXED: Clean stateless toggle switch functions instantly without component deadlock
- */
 function toggleAmbientMusic() {
     const track = document.getElementById('bg-focus-music');
     const btn = document.getElementById('audioToggleBtn');
     
     if (!track) return;
 
-    // Force engine trigger if user directly clicked the button first
     if (!initialPlayTriggered) {
         track.volume = 0.25;
         track.muted = false;
